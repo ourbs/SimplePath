@@ -12,7 +12,7 @@ local DEFAULT_SETTINGS = {
 
 	TIME_VARIANCE = 0.01;
 
-	COMPARISON_CHECKS = math.huge;
+	COMPARISON_CHECKS = 1;
 
 	JUMP_WHEN_STUCK = true;
 }
@@ -226,6 +226,7 @@ function Path.new(agent, agentParameters, override)
 	--Path blocked connection
 	self._path.Blocked:Connect(function(...)
 		if (self._currentWaypoint <= ... and self._currentWaypoint + 1 >= ...) and self._humanoid then
+			wait(0.2)
 			setJumpState(self)
 			self._events.Blocked:Fire(self._agent, self._waypoints[...])
 		end
